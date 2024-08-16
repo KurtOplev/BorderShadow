@@ -1,0 +1,705 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="BorderShadow.TestPage"
+             Title="TestPage">
+
+    <ScrollView 
+        BackgroundColor="#F8F8F8"
+        >
+
+        <!--A bit strange - Label_Text_3 exists 7 times without Visual Studio giving an error-->
+        <!--A bit strange - Label_Text_4 exists 7 times without Visual Studio giving an error-->
+        <!--A bit strange - HeaderImage3 exists 7 times without Visual Studio giving an error-->
+        <!--Lidt underligt - Label_Text_3 findes 7 gange uden at Visual Studio giver fejl-->
+        <!--Lidt underligt - Label_Text_4 findes 7 gange uden at Visual Studio giver fejl-->
+        <!--Lidt underligt - HeaderImage3 findes 7 gange uden at Visual Studio giver fejl-->
+
+        <StackLayout
+            Spacing="15"
+            >
+
+            <Label
+                Text="Frame with Shadow"
+                Style="{StaticResource SubHeadline}" />
+
+            <Frame 
+                Margin="20"
+                Padding="0"
+                BackgroundColor="white" 
+                BorderColor="#E5E5E5"
+                CornerRadius="20"
+                HasShadow="True" 
+                >
+
+                <Frame.Shadow>
+                    <Shadow Brush="#E5E5E5"
+                        Offset="0,0"
+                        Radius="100"
+                        Opacity="1" />
+                </Frame.Shadow>
+
+                <!--Kind of weird - Visual Studio complains that it can't find the DataContext for MyPropertyItems-->
+                <!--A bit strange - if BindableLayout.ItemsSource is omitted here, nothing is displayed-->
+                <!--Lidt underligt - Visual Studio brokker sig over at den ikke kan finde DataContext for MyPropertyItems-->
+                <!--Lidt underligt - hvis BindableLayout.ItemsSource undlades her vises der ingenting-->
+
+                <StackLayout
+                    BindableLayout.ItemsSource="{Binding MyPropertyItems}"
+                    Margin="0"
+                    Padding="10"
+                    >
+
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <toolkit:Expander x:Name="MyComplexExpanders" 
+                                VerticalOptions="StartAndExpand">
+
+                                <toolkit:Expander.Header>
+                                    <Grid
+                                        ColumnDefinitions="*,Auto"
+                                        Margin="0"
+                                        Padding="10"
+                                        >
+
+                                        <Label x:Name="Label_Text_3" 
+                                            Text="{Binding Question}"
+                                            FontAttributes="Bold"
+                                            FontSize="14" 
+                                            LineHeight="1.5"
+                                            VerticalOptions="StartAndExpand"
+                                            />
+
+                                        <Image x:Name="HeaderImage3" 
+                                            Source="pil.png"
+                                            Grid.Column="1" 
+                                            Margin="0,0,0,0" 
+                                            HeightRequest="15" 
+                                            WidthRequest="15" 
+                                            VerticalOptions="Start"
+                                            >
+
+                                            <Image.Triggers>
+                                                <DataTrigger 
+                                                    Binding="{Binding Source={x:Reference MyComplexExpanders}, Path=IsExpanded}"
+                                                    TargetType="Image"
+                                                    Value="True">
+
+                                                    <Setter 
+                                                        Property="Rotation"
+                                                        Value="180" />
+                                                </DataTrigger>
+                                            </Image.Triggers>
+                                        </Image>
+                                    </Grid>
+                                </toolkit:Expander.Header>
+
+                                <toolkit:Expander.Content>
+                                    <VerticalStackLayout
+                                        BindableLayout.ItemsSource="{Binding MyPropertyItems}"
+                                        Margin="5"  
+                                        >
+
+                                        <BindableLayout.ItemTemplate>
+                                            <DataTemplate>
+                                                <VerticalStackLayout 
+                                                    Padding="5">
+
+                                                    <Label x:Name="Label_Text_4" 
+                                                        Text="{Binding Answer}"
+                                                        FontSize="13" 
+                                                        FontAttributes="None" 
+                                                        LineHeight="1.5"
+                                                        />
+                                                </VerticalStackLayout>
+                                            </DataTemplate>
+                                        </BindableLayout.ItemTemplate>
+                                    </VerticalStackLayout>
+                                </toolkit:Expander.Content>
+                            </toolkit:Expander>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
+            </Frame>
+
+            <Label
+                Text="Frame without Shadow"
+                Style="{StaticResource SubHeadline}" />
+
+            <Frame 
+                Margin="20"
+                Padding="0"
+                BackgroundColor="white" 
+                BorderColor="#E5E5E5"
+                CornerRadius="20"
+                HasShadow="False" 
+                >
+
+                <Frame.Shadow>
+                    <Shadow Brush="#E5E5E5"
+                        Offset="0,0"
+                        Radius="100"
+                        Opacity="1" />
+                </Frame.Shadow>
+
+                <StackLayout
+                    BindableLayout.ItemsSource="{Binding MyPropertyItems}"
+                    Margin="0"
+                    Padding="10"
+                    >
+
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <toolkit:Expander x:Name="MyComplexExpanders" 
+                                VerticalOptions="StartAndExpand">
+
+                                <toolkit:Expander.Header>
+                                    <Grid
+                                        ColumnDefinitions="*,Auto"
+                                        Margin="0"
+                                        Padding="10"
+                                        >
+
+                                        <Label x:Name="Label_Text_3" 
+                                            Text="{Binding Question}"
+                                            FontAttributes="Bold"
+                                            FontSize="14" 
+                                            LineHeight="1.5"
+                                            VerticalOptions="StartAndExpand"
+                                            />
+
+                                        <Image x:Name="HeaderImage3" 
+                                            Source="pil.png"
+                                            Grid.Column="1" 
+                                            Margin="0,0,0,0" 
+                                            HeightRequest="15" 
+                                            WidthRequest="15" 
+                                            VerticalOptions="Start"
+                                            >
+
+                                            <Image.Triggers>
+                                                <DataTrigger 
+                                                    Binding="{Binding Source={x:Reference MyComplexExpanders}, Path=IsExpanded}"
+                                                    TargetType="Image"
+                                                    Value="True">
+
+                                                    <Setter 
+                                                        Property="Rotation"
+                                                        Value="180" />
+                                                </DataTrigger>
+                                            </Image.Triggers>
+                                        </Image>
+                                    </Grid>
+                                </toolkit:Expander.Header>
+
+                                <toolkit:Expander.Content>
+                                    <VerticalStackLayout
+                                        BindableLayout.ItemsSource="{Binding MyPropertyItems}"
+                                        Margin="5"  
+                                        >
+
+                                        <BindableLayout.ItemTemplate>
+                                            <DataTemplate>
+                                                <VerticalStackLayout 
+                                                    Padding="5">
+
+                                                    <Label x:Name="Label_Text_4" 
+                                                        Text="{Binding Answer}"
+                                                        FontSize="13" 
+                                                        FontAttributes="None" 
+                                                        LineHeight="1.5"
+                                                        />
+                                                </VerticalStackLayout>
+                                            </DataTemplate>
+                                        </BindableLayout.ItemTemplate>
+                                    </VerticalStackLayout>
+                                </toolkit:Expander.Content>
+                            </toolkit:Expander>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
+            </Frame>
+
+            <Label
+                Text="Border with Shadow"
+                Style="{StaticResource SubHeadline}" />
+
+            <!--Border has no BorderColor to use instead of Shadow-->
+            <!--BorderColor="#E5E5E5"-->
+            <!--Border has no CornerRadius like Frame has-->
+            <!--CornerRadius="20"-->
+
+            <Border  
+                Margin="15"
+                Padding="0"
+                BackgroundColor="white"
+                Opacity="100"
+                >
+
+                <Border.Shadow>
+                    <Shadow Brush="#E5E5E5"
+                        Offset="0,0"
+                        Radius="100"
+                        Opacity="1" />
+                </Border.Shadow>
+
+                <StackLayout
+                    BindableLayout.ItemsSource="{Binding MyPropertyItems}"
+                    Margin="0"
+                    Padding="10"
+                    >
+
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <toolkit:Expander x:Name="MyComplexExpanders" 
+                                VerticalOptions="StartAndExpand">
+
+                                <toolkit:Expander.Header>
+                                    <Grid
+                                        ColumnDefinitions="*,Auto"
+                                        Margin="0"
+                                        Padding="10"
+                                        >
+
+                                        <Label x:Name="Label_Text_3" 
+                                            Text="{Binding Question}"
+                                            FontAttributes="Bold"
+                                            FontSize="14" 
+                                            LineHeight="1.5"
+                                            VerticalOptions="StartAndExpand"
+                                            />
+
+                                        <Image x:Name="HeaderImage3" 
+                                            Source="pil.png"
+                                            Grid.Column="1" 
+                                            Margin="0,0,0,0" 
+                                            HeightRequest="15" 
+                                            WidthRequest="15" 
+                                            VerticalOptions="Start"
+                                            >
+
+                                            <Image.Triggers>
+                                                <DataTrigger 
+                                                    Binding="{Binding Source={x:Reference MyComplexExpanders}, Path=IsExpanded}"
+                                                    TargetType="Image"
+                                                    Value="True">
+
+                                                    <Setter 
+                                                        Property="Rotation"
+                                                        Value="180" />
+                                                </DataTrigger>
+                                            </Image.Triggers>
+                                        </Image>
+                                    </Grid>
+                                </toolkit:Expander.Header>
+
+                                <toolkit:Expander.Content>
+                                    <VerticalStackLayout
+                                        BindableLayout.ItemsSource="{Binding MyPropertyItems}"
+                                        Margin="5"  
+                                        >
+
+                                        <BindableLayout.ItemTemplate>
+                                            <DataTemplate>
+                                                <VerticalStackLayout 
+                                                    Padding="5">
+
+                                                    <Label x:Name="Label_Text_4" 
+                                                        Text="{Binding Answer}"
+                                                        FontSize="13" 
+                                                        FontAttributes="None" 
+                                                        LineHeight="1.5"
+                                                        />
+                                                </VerticalStackLayout>
+                                            </DataTemplate>
+                                        </BindableLayout.ItemTemplate>
+                                    </VerticalStackLayout>
+                                </toolkit:Expander.Content>
+                            </toolkit:Expander>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
+            </Border>
+
+            <Label
+                Text="Border without Shadow"
+                Style="{StaticResource SubHeadline}" />
+
+            <Border  
+                Margin="15"
+                Padding="0"
+                BackgroundColor="white"
+                Opacity="100"
+                >
+
+                <!--<Border.Shadow>
+                    <Shadow Brush="#E5E5E5"
+                        Offset="0,0"
+                        Radius="100"
+                        Opacity="1" />
+                </Border.Shadow>-->
+
+                <StackLayout
+                    BindableLayout.ItemsSource="{Binding MyPropertyItems}"
+                    Margin="0"
+                    Padding="10"
+                    >
+
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <toolkit:Expander x:Name="MyComplexExpanders" 
+                                VerticalOptions="StartAndExpand">
+
+                                <toolkit:Expander.Header>
+                                    <Grid
+                                        ColumnDefinitions="*,Auto"
+                                        Margin="0"
+                                        Padding="10"
+                                        >
+
+                                        <Label x:Name="Label_Text_3" 
+                                            Text="{Binding Question}"
+                                            FontAttributes="Bold"
+                                            FontSize="14" 
+                                            LineHeight="1.5"
+                                            VerticalOptions="StartAndExpand"
+                                            />
+
+                                        <Image x:Name="HeaderImage3" 
+                                            Source="pil.png"
+                                            Grid.Column="1" 
+                                            Margin="0,0,0,0" 
+                                            HeightRequest="15" 
+                                            WidthRequest="15" 
+                                            VerticalOptions="Start"
+                                            >
+
+                                            <Image.Triggers>
+                                                <DataTrigger 
+                                                    Binding="{Binding Source={x:Reference MyComplexExpanders}, Path=IsExpanded}"
+                                                    TargetType="Image"
+                                                    Value="True">
+
+                                                    <Setter 
+                                                        Property="Rotation"
+                                                        Value="180" />
+                                                </DataTrigger>
+                                            </Image.Triggers>
+                                        </Image>
+                                    </Grid>
+                                </toolkit:Expander.Header>
+
+                                <toolkit:Expander.Content>
+                                    <VerticalStackLayout
+                                        BindableLayout.ItemsSource="{Binding MyPropertyItems}"
+                                        Margin="5"  
+                                        >
+
+                                        <BindableLayout.ItemTemplate>
+                                            <DataTemplate>
+                                                <VerticalStackLayout 
+                                                    Padding="5">
+
+                                                    <Label x:Name="Label_Text_4" 
+                                                        Text="{Binding Answer}"
+                                                        FontSize="13" 
+                                                        FontAttributes="None" 
+                                                        LineHeight="1.5"
+                                                        />
+                                                </VerticalStackLayout>
+                                            </DataTemplate>
+                                        </BindableLayout.ItemTemplate>
+                                    </VerticalStackLayout>
+                                </toolkit:Expander.Content>
+                            </toolkit:Expander>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
+            </Border>
+
+            <Label
+                Text="StackLayout with Shadow"
+                Style="{StaticResource SubHeadline}" />
+
+            <!--StackLayout has no BorderColor to use instead of Shadow-->
+            <!--BorderColor="#E5E5E5"-->
+            <!--StackLayout has no CornerRadius like Frame has-->
+            <!--CornerRadius="20"-->
+            
+            <StackLayout
+                BindableLayout.ItemsSource="{Binding MyPropertyItems}"
+                Margin="15"
+                Padding="0"
+                BackgroundColor="white"
+                Opacity="100"
+                >
+                
+                <StackLayout.Shadow>
+                    <Shadow Brush="#E5E5E5"
+                        Offset="0,0"
+                        Radius="100"
+                        Opacity="1" />
+                </StackLayout.Shadow>
+
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
+                        <toolkit:Expander x:Name="MyComplexExpanders" 
+                            VerticalOptions="StartAndExpand">
+
+                            <toolkit:Expander.Header>
+                                <Grid
+                                    ColumnDefinitions="*,Auto"
+                                    Margin="0"
+                                    Padding="10"
+                                    >
+
+                                    <Label x:Name="Label_Text_3" 
+                                        Text="{Binding Question}"
+                                        FontAttributes="Bold"
+                                        FontSize="14" 
+                                        LineHeight="1.5"
+                                        VerticalOptions="StartAndExpand"
+                                        />
+
+                                    <Image x:Name="HeaderImage3" 
+                                        Source="pil.png"
+                                        Grid.Column="1" 
+                                        Margin="0,0,0,0" 
+                                        HeightRequest="15" 
+                                        WidthRequest="15" 
+                                        VerticalOptions="Start"
+                                        >
+
+                                        <Image.Triggers>
+                                            <DataTrigger 
+                                                Binding="{Binding Source={x:Reference MyComplexExpanders}, Path=IsExpanded}"
+                                                TargetType="Image"
+                                                Value="True">
+
+                                                <Setter 
+                                                    Property="Rotation"
+                                                    Value="180" />
+                                            </DataTrigger>
+                                        </Image.Triggers>
+                                    </Image>
+                                </Grid>
+                            </toolkit:Expander.Header>
+
+                            <toolkit:Expander.Content>
+                                <VerticalStackLayout
+                                    BindableLayout.ItemsSource="{Binding MyPropertyItems}"
+                                    Margin="5"  
+                                    >
+
+                                    <BindableLayout.ItemTemplate>
+                                        <DataTemplate>
+                                            <VerticalStackLayout 
+                                                Padding="5">
+
+                                                <Label x:Name="Label_Text_4" 
+                                                    Text="{Binding Answer}"
+                                                    FontSize="13" 
+                                                    FontAttributes="None" 
+                                                    LineHeight="1.5"
+                                                    />
+                                            </VerticalStackLayout>
+                                        </DataTemplate>
+                                    </BindableLayout.ItemTemplate>
+                                </VerticalStackLayout>
+                            </toolkit:Expander.Content>
+                        </toolkit:Expander>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </StackLayout>
+
+            <Label
+                Text="StackLayout without Shadow"
+                Style="{StaticResource SubHeadline}" />
+
+            <StackLayout
+                BindableLayout.ItemsSource="{Binding MyPropertyItems}"
+                Margin="15"
+                Padding="0"
+                BackgroundColor="white"
+                Opacity="100"
+                >
+
+                <!--<StackLayout.Shadow>
+                    <Shadow Brush="#E5E5E5"
+                        Offset="0,0"
+                        Radius="100"
+                        Opacity="1" />
+                </StackLayout.Shadow>-->
+
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
+                        <toolkit:Expander x:Name="MyComplexExpanders" 
+                            VerticalOptions="StartAndExpand">
+
+                            <toolkit:Expander.Header>
+                                <Grid
+                                    ColumnDefinitions="*,Auto"
+                                    Margin="0"
+                                    Padding="10"
+                                    >
+
+                                    <Label x:Name="Label_Text_3" 
+                                        Text="{Binding Question}"
+                                        FontAttributes="Bold"
+                                        FontSize="14" 
+                                        LineHeight="1.5"
+                                        VerticalOptions="StartAndExpand"
+                                        />
+
+                                    <Image x:Name="HeaderImage3" 
+                                        Source="pil.png"
+                                        Grid.Column="1" 
+                                        Margin="0,0,0,0" 
+                                        HeightRequest="15" 
+                                        WidthRequest="15" 
+                                        VerticalOptions="Start"
+                                        >
+
+                                        <Image.Triggers>
+                                            <DataTrigger 
+                                                Binding="{Binding Source={x:Reference MyComplexExpanders}, Path=IsExpanded}"
+                                                TargetType="Image"
+                                                Value="True">
+
+                                                <Setter 
+                                                    Property="Rotation"
+                                                    Value="180" />
+                                            </DataTrigger>
+                                        </Image.Triggers>
+                                    </Image>
+                                </Grid>
+                            </toolkit:Expander.Header>
+
+                            <toolkit:Expander.Content>
+                                <VerticalStackLayout
+                                    BindableLayout.ItemsSource="{Binding MyPropertyItems}"
+                                    Margin="5"  
+                                    >
+
+                                    <BindableLayout.ItemTemplate>
+                                        <DataTemplate>
+                                            <VerticalStackLayout 
+                                                Padding="5">
+
+                                                <Label x:Name="Label_Text_4" 
+                                                    Text="{Binding Answer}"
+                                                    FontSize="13" 
+                                                    FontAttributes="None" 
+                                                    LineHeight="1.5"
+                                                    />
+                                            </VerticalStackLayout>
+                                        </DataTemplate>
+                                    </BindableLayout.ItemTemplate>
+                                </VerticalStackLayout>
+                            </toolkit:Expander.Content>
+                        </toolkit:Expander>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </StackLayout>
+
+            <Label
+                Text="Expander with Shadow"
+                Style="{StaticResource SubHeadline}" />
+
+            <!--Expander has no BorderColor to use instead of Shadow-->
+            <!--BorderColor="#E5E5E5"-->
+            <!--Expander has no CornerRadius like Frame has-->
+            <!--CornerRadius="20"-->
+
+            <StackLayout
+                BindableLayout.ItemsSource="{Binding MyPropertyItems}"
+                >
+
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
+                        <toolkit:Expander x:Name="MyComplexExpanders" 
+                            VerticalOptions="StartAndExpand"
+                            Margin="15"
+                            Padding="0"
+                            BackgroundColor="white"
+                            Opacity="100"
+                            >
+
+                            <toolkit:Expander.Shadow>
+                                <Shadow Brush="#E5E5E5"
+                                Offset="0,0"
+                                Radius="100"
+                                Opacity="1" />
+                            </toolkit:Expander.Shadow>
+
+                            <toolkit:Expander.Header>
+                                <Grid
+                                    ColumnDefinitions="*,Auto"
+                                    Margin="0"
+                                    Padding="10"
+                                    >
+
+                                    <Label x:Name="Label_Text_3" 
+                                        Text="{Binding Question}"
+                                        FontAttributes="Bold"
+                                        FontSize="14" 
+                                        LineHeight="1.5"
+                                        VerticalOptions="StartAndExpand"
+                                        />
+
+                                    <Image x:Name="HeaderImage3" 
+                                        Source="pil.png"
+                                        Grid.Column="1" 
+                                        Margin="0,0,0,0" 
+                                        HeightRequest="15" 
+                                        WidthRequest="15" 
+                                        VerticalOptions="Start"
+                                        >
+
+                                        <Image.Triggers>
+                                            <DataTrigger 
+                                                Binding="{Binding Source={x:Reference MyComplexExpanders}, Path=IsExpanded}"
+                                                TargetType="Image"
+                                                Value="True">
+
+                                                <Setter 
+                                                    Property="Rotation"
+                                                    Value="180" />
+                                            </DataTrigger>
+                                        </Image.Triggers>
+                                    </Image>
+                                </Grid>
+                            </toolkit:Expander.Header>
+
+                            <toolkit:Expander.Content>
+                                <VerticalStackLayout
+                                    BindableLayout.ItemsSource="{Binding MyPropertyItems}"
+                                    Margin="5"  
+                                    >
+
+                                    <BindableLayout.ItemTemplate>
+                                        <DataTemplate>
+                                            <VerticalStackLayout 
+                                                Padding="5">
+
+                                                <Label x:Name="Label_Text_4" 
+                                                    Text="{Binding Answer}"
+                                                    FontSize="13" 
+                                                    FontAttributes="None" 
+                                                    LineHeight="1.5"
+                                                    />
+                                            </VerticalStackLayout>
+                                        </DataTemplate>
+                                    </BindableLayout.ItemTemplate>
+                                </VerticalStackLayout>
+                            </toolkit:Expander.Content>
+                        </toolkit:Expander>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </StackLayout>
+
+        </StackLayout>
+    </ScrollView>
+
+</ContentPage>

@@ -81,9 +81,9 @@ Expander with Shadow
 
 Try opening and closing the Expander elements in the different examples.
 
-Then you will see that the texts overlap each other.
+Then you will see that the texts overlap each other, when the control has Shadow set.
 
-The solution of Frame with BorderColor instead of Shadow is the only acceptable solution.
+The solution of Frame with BorderColor instead of Shadow is the only acceptable solution for now.
 
 The solution with Border cannot be accepted despite the fact that there is an automatic BorderColor, as the CornerRadius does not exist on the Border.
 
